@@ -6,7 +6,7 @@ import jdk.jfr.Frequency;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class RecurringExpenses {
+public class RecurringExpense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
