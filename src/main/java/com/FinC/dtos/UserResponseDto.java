@@ -1,4 +1,4 @@
 package com.FinC.dtos;
 
-public record UserResponseDto() {
+public record UserResponseDto(String email, String name) {
 }

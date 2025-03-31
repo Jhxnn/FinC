@@ -1,4 +1,7 @@
 package com.FinC.dtos;
 
-public record ExpenseDto() {
+import java.time.LocalDate;
+import java.util.UUID;
+
+public record ExpenseDto(double value, LocalDate date, String name, UUID accountId) {
 }
