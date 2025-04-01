@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Entity
+@Table(name = "expenses")
 public class Expense{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

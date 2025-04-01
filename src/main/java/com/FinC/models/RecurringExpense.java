@@ -6,6 +6,8 @@ import jdk.jfr.Frequency;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Entity
+@Table(name = "recurring_expenses")
 public class RecurringExpense {
 
     @Id
