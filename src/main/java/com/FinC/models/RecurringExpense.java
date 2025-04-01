@@ -29,6 +29,8 @@ public class RecurringExpense {
     @JoinColumn(referencedColumnName = "id", name = "user_id")
     private Account account;
 
+    private String pix;
+
 
     public UUID getRecurringExpensesId() {
         return recurringExpensesId;
