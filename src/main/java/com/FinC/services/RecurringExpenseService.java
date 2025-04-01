@@ -18,6 +18,9 @@ public class RecurringExpenseService {
     RecurringExpenseRepository recurringExpenseRepository;
 
     @Autowired
+    AccountService accountService;
+
+    @Autowired
     ApiAsaasService apiAsaasService;
 
     public RecurringExpense findById(UUID id){
@@ -30,6 +33,7 @@ public class RecurringExpenseService {
         var recurringExpense = new RecurringExpense();
         BeanUtils.copyProperties(recurringExpenseDto,recurringExpense);
         recurringExpense.setPix(apiAsaasService.gerarQrCode(recurringExpenseDto.pix(),recurringExpenseDto.value()));
+        recurringExpense.setAccount(accountService.findById(recurringExpenseDto.accountId()));
         return recurringExpenseRepository.save(recurringExpense);
     }
     public RecurringExpense updateRecurringExpense(RecurringExpenseDto recurringExpenseDto,UUID id){
