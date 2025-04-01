@@ -31,6 +31,13 @@ public class RecurringExpense {
 
     private String pix;
 
+    public String getPix() {
+        return pix;
+    }
+
+    public void setPix(String pix) {
+        this.pix = pix;
+    }
 
     public UUID getRecurringExpensesId() {
         return recurringExpensesId;

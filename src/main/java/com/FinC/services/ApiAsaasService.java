@@ -15,11 +15,11 @@ public class ApiAsaasService {
     private static final String API_KEY = apiKey;
     private final OkHttpClient client = new OkHttpClient();
 
-    public String gerarQrCode(String addressKey, String description, double value) throws IOException {
+    public String gerarQrCode(String addressKey, double value) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         String jsonBody = String.format(
-                "{\"addressKey\":\"%s\",\"description\":\"%s\",\"value\":%.2f}",
-                addressKey, description, value
+                "{\"addressKey\":\"%s\",\"value\":%.2f}",
+                addressKey, value
         );
 
         RequestBody body = RequestBody.create(mediaType, jsonBody);

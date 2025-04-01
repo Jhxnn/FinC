@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class RecurringExpenseController {
         return ResponseEntity.status(HttpStatus.OK).body(recurringExpenseService.findById(id));
     }
     @PostMapping
-    public ResponseEntity<RecurringExpense> createRecurringExpense(@RequestBody RecurringExpenseDto recurringExpenseDto){
+    public ResponseEntity<RecurringExpense> createRecurringExpense(@RequestBody RecurringExpenseDto recurringExpenseDto) throws IOException {
         return ResponseEntity.status(HttpStatus.CREATED).body(recurringExpenseService.createRecurringExpense(recurringExpenseDto));
     }
     @PutMapping("/{id}")
