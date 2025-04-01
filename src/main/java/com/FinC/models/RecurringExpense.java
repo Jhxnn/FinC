@@ -1,7 +1,8 @@
 package com.FinC.models;
 
+import com.FinC.models.enums.Frequency;
 import jakarta.persistence.*;
-import jdk.jfr.Frequency;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class RecurringExpense {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private Frequency frequency;
 
     @ManyToOne
