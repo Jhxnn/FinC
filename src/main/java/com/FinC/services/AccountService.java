@@ -28,6 +28,7 @@ public class AccountService {
     public Account createAccount(AccountDto accountDto){
         var account = new Account();
         BeanUtils.copyProperties(accountDto,account);
+//        emailService.enviarEmailTexto()
         return accountRepository.save(account);
     }
     public Account updateAccount(AccountDto accountDto,UUID id){
