@@ -16,6 +16,9 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    EmailService emailService;
+
     public Account findById(UUID id){
         return accountRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
     }
