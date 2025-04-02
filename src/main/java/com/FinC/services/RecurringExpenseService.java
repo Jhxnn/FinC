@@ -1,6 +1,7 @@
 package com.FinC.services;
 
 import com.FinC.dtos.RecurringExpenseDto;
+import com.FinC.models.Expense;
 import com.FinC.models.RecurringExpense;
 import com.FinC.repositories.RecurringExpenseRepository;
 import org.springframework.beans.BeanUtils;
@@ -26,6 +27,11 @@ public class RecurringExpenseService {
     public RecurringExpense findById(UUID id){
         return recurringExpenseRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
     }
+
+    public List<RecurringExpense> findByAccount(UUID accountId){
+        return recurringExpenseRepository.findByAccount(accountService.findById(accountId));
+    }
+
     public List<RecurringExpense> findAll(){
         return recurringExpenseRepository.findAll();
     }

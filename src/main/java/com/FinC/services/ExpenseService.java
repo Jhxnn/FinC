@@ -16,11 +16,17 @@ public class ExpenseService {
     @Autowired
     ExpenseRepository expenseRepository;
 
+    @Autowired
+    AccountService accountService;
+
     public Expense findById(UUID id){
         return expenseRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
     }
     public List<Expense> findAll(){
         return expenseRepository.findAll();
+    }
+    public List<Expense> findByAccount(UUID accountId){
+        return expenseRepository.findByAccount(accountService.findById(accountId));
     }
     public Expense createExpense(ExpenseDto expenseDto){
         var expense = new Expense();

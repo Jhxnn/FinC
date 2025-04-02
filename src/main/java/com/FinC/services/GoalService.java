@@ -1,6 +1,7 @@
 package com.FinC.services;
 
 import com.FinC.dtos.GoalDto;
+import com.FinC.models.Expense;
 import com.FinC.models.Goal;
 import com.FinC.repositories.GoalRepository;
 import org.springframework.beans.BeanUtils;
@@ -16,11 +17,18 @@ public class GoalService {
     @Autowired
     GoalRepository goalRepository;
 
+    @Autowired
+    AccountService accountService;
+
     public Goal findById(UUID id){
         return goalRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
     }
     public List<Goal> findAll(){
         return goalRepository.findAll();
+    }
+
+    public List<Goal> findByAccount(UUID accountId){
+        return goalRepository.findByAccount(accountService.findById(accountId));
     }
     public Goal createGoal(GoalDto goalDto){
         var goal = new Goal();
