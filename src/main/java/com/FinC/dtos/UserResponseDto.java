@@ -1,4 +1,6 @@
 package com.FinC.dtos;
 
-public record UserResponseDto(String email, String name) {
+import java.util.UUID;
+
+public record UserResponseDto(String email, String name, UUID userId) {
 }
