@@ -26,6 +26,10 @@ public class ExpenseController {
     public ResponseEntity<Expense> findById(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(expenseService.findById(id));
     }
+    @GetMapping("/account/{accountId}")
+    public ResponseEntity<List<Expense>> findByAccount(@PathVariable(name = "id")UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(expenseService.findByAccount(id));
+    }
     @PostMapping
     public ResponseEntity<Expense> createExpense(@RequestBody ExpenseDto expenseDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.createExpense(expenseDto));

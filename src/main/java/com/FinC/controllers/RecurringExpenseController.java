@@ -1,6 +1,7 @@
 package com.FinC.controllers;
 
 import com.FinC.dtos.RecurringExpenseDto;
+import com.FinC.models.Expense;
 import com.FinC.models.RecurringExpense;
 import com.FinC.services.RecurringExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class RecurringExpenseController {
     @GetMapping("/{id}")
     public ResponseEntity<RecurringExpense> findById(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(recurringExpenseService.findById(id));
+    }
+
+    @GetMapping("/account/{accountId}")
+    public ResponseEntity<List<RecurringExpense>> findByAccount(@PathVariable(name = "id")UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(recurringExpenseService.findByAccount(id));
     }
     @PostMapping
     public ResponseEntity<RecurringExpense> createRecurringExpense(@RequestBody RecurringExpenseDto recurringExpenseDto) throws IOException {

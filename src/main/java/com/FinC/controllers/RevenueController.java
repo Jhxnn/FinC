@@ -1,6 +1,7 @@
 package com.FinC.controllers;
 
 import com.FinC.dtos.RevenueDto;
+import com.FinC.models.Expense;
 import com.FinC.models.Revenue;
 import com.FinC.services.RevenueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class RevenueController {
     @GetMapping
     public ResponseEntity<List<Revenue>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(revenueService.findAll());
+    }
+
+    @GetMapping("/account/{accountId}")
+    public ResponseEntity<List<Revenue>> findByAccount(@PathVariable(name = "id")UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(revenueService.findByAccount(id));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Revenue> findById(@PathVariable(name = "id") UUID id){

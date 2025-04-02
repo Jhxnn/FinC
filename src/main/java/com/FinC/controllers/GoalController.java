@@ -1,6 +1,7 @@
 package com.FinC.controllers;
 
 import com.FinC.dtos.GoalDto;
+import com.FinC.models.Expense;
 import com.FinC.models.Goal;
 import com.FinC.services.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class GoalController {
     @GetMapping
     public ResponseEntity<List<Goal>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(goalService.findAll());
+    }
+
+    @GetMapping("/account/{accountId}")
+    public ResponseEntity<List<Goal>> findByAccount(@PathVariable(name = "id")UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(goalService.findByAccount(id));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Goal> findById(@PathVariable(name = "id") UUID id){
