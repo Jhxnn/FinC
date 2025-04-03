@@ -26,7 +26,7 @@ public class RevenueController {
     }
 
     @GetMapping("/account/{accountId}")
-    public ResponseEntity<List<Revenue>> findByAccount(@PathVariable(name = "id")UUID id){
+    public ResponseEntity<List<Revenue>> findByAccount(@PathVariable(name = "accountIdt add")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(revenueService.findByAccount(id));
     }
     @GetMapping("/date")

@@ -39,7 +39,7 @@ public class RecurringExpenseController {
     }
 
     @GetMapping("/account/{accountId}")
-    public ResponseEntity<List<RecurringExpense>> findByAccount(@PathVariable(name = "id")UUID id){
+    public ResponseEntity<List<RecurringExpense>> findByAccount(@PathVariable(name = "accountId")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(recurringExpenseService.findByAccount(id));
     }
     @PostMapping

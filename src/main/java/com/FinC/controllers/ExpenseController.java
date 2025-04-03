@@ -28,7 +28,7 @@ public class ExpenseController {
         return ResponseEntity.status(HttpStatus.OK).body(expenseService.findById(id));
     }
     @GetMapping("/account/{accountId}")
-    public ResponseEntity<List<Expense>> findByAccount(@PathVariable(name = "id")UUID id){
+    public ResponseEntity<List<Expense>> findByAccount(@PathVariable(name = "accountId")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(expenseService.findByAccount(id));
     }
 

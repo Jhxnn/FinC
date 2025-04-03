@@ -29,7 +29,7 @@ public class RecurringExpense {
     @JoinColumn(referencedColumnName = "id", name = "user_id")
     private Account account;
 
-    @Lob
+
     private String pix;
 
     public String getPix() {

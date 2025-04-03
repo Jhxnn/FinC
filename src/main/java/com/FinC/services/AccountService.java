@@ -74,10 +74,13 @@ public class AccountService {
             document.add(dateP);
             document.add(valueP);
             document.add(nameP);
+            document.add(new Paragraph("         "));
+            document.add(new Paragraph("         "));
         }
         document.add(new Paragraph("________________"));
 
         document.add(new Paragraph("EXPENSES"));
+        document.add(new Paragraph("         "));
         for(Expense expense : expenses){
             var nameP = new Paragraph("Name: " +  expense.getName());
             var dateP = new Paragraph("Date: " + expense.getDate());
@@ -85,6 +88,8 @@ public class AccountService {
             document.add(dateP);
             document.add(valueP);
             document.add(nameP);
+            document.add(new Paragraph("         "));
+            document.add(new Paragraph("         "));
         }
         document.add(new Paragraph("________________"));
 
@@ -99,6 +104,10 @@ public class AccountService {
             document.add(dateP);
             document.add(valueP);
             document.add(new Paragraph("Frequency: " + recurringExpense.getFrequency()));
+            document.add(new Paragraph("         "));
+            document.add(new Paragraph("         "));
+
+
 
 
         }

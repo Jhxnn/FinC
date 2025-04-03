@@ -37,6 +37,7 @@ public class RevenueService {
     public Revenue createRevenue(RevenueDto revenueDto){
         var revenue = new Revenue();
         BeanUtils.copyProperties(revenueDto,revenue);
+        revenue.setAccount(accountRepository.findById(revenueDto.accountId()).orElseThrow(()-> new RuntimeException("Cannot be found")));
         return revenueRepository.save(revenue);
     }
     public List<Revenue> findByDate(UUID accountId, LocalDate startDate, LocalDate endDate){
