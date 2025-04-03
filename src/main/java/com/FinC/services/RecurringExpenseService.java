@@ -4,6 +4,7 @@ import com.FinC.dtos.RecurringExpenseDto;
 import com.FinC.models.Expense;
 import com.FinC.models.RecurringExpense;
 import com.FinC.models.Revenue;
+import com.FinC.repositories.AccountRepository;
 import com.FinC.repositories.RecurringExpenseRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class RecurringExpenseService {
     RecurringExpenseRepository recurringExpenseRepository;
 
     @Autowired
-    AccountService accountService;
+    AccountRepository accountRepository;
 
     @Autowired
     ApiAsaasService apiAsaasService;
@@ -31,10 +32,10 @@ public class RecurringExpenseService {
     }
 
     public List<RecurringExpense> findByAccount(UUID accountId){
-        return recurringExpenseRepository.findByAccount(accountService.findById(accountId));
+        return recurringExpenseRepository.findByAccount(accountRepository.findById(accountId).orElseThrow(()-> new RuntimeException("Cannot be found")));
     }
     public List<RecurringExpense> findByDate(UUID accountId, LocalDate startDate, LocalDate endDate){
-        var account = accountService.findById(accountId);
+        var account = accountRepository.findById(accountId).orElseThrow(()-> new RuntimeException("Cannot be found"));
         return recurringExpenseRepository.findByAccountAndDateBetween(account, startDate, endDate);
     }
 
@@ -45,7 +46,7 @@ public class RecurringExpenseService {
         var recurringExpense = new RecurringExpense();
         BeanUtils.copyProperties(recurringExpenseDto,recurringExpense);
         recurringExpense.setPix(apiAsaasService.gerarQrCode(recurringExpenseDto.pix(),recurringExpenseDto.value()));
-        recurringExpense.setAccount(accountService.findById(recurringExpenseDto.accountId()));
+        recurringExpense.setAccount(accountRepository.findById(recurringExpenseDto.accountId()).orElseThrow(()-> new RuntimeException("Cannot be found")));
         return recurringExpenseRepository.save(recurringExpense);
     }
     public RecurringExpense updateRecurringExpense(RecurringExpenseDto recurringExpenseDto,UUID id){
