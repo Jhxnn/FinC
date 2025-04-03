@@ -2,11 +2,13 @@ package com.FinC.services;
 
 import com.FinC.dtos.ExpenseDto;
 import com.FinC.models.Expense;
+import com.FinC.models.Revenue;
 import com.FinC.repositories.ExpenseRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +30,12 @@ public class ExpenseService {
     public List<Expense> findByAccount(UUID accountId){
         return expenseRepository.findByAccount(accountService.findById(accountId));
     }
+
+    public List<Expense> findByDate(UUID accountId, LocalDate startDate, LocalDate endDate){
+        var account = accountService.findById(accountId);
+        return expenseRepository.findByAccountAndDateBetween(account, startDate, endDate);
+    }
+
     public Expense createExpense(ExpenseDto expenseDto){
         var expense = new Expense();
         BeanUtils.copyProperties(expenseDto,expense);
