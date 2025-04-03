@@ -49,7 +49,6 @@ public class UserService {
         var user = new User();
         BeanUtils.copyProperties(userRequestDto, user);
         user.setPassword(encryptedPass);
-        emailService.enviarEmailTexto(user.getEmail(), "Conta criada","Bem vindo ao FinC " + user.getName() + ", faça bom uso :)");
         userRepository.save(user);
         return new UserResponseDto(user.getEmail(),user.getName(),user.getUserId());
     }

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ApiAsaasService {
     private static final String API_URL = "https://api-sandbox.asaas.com/v3/pix/qrCodes/static";
 
-    @Value("${asaas.apikey}")
+    @Value("${asaas.api.key}")
     private String API_KEY;
     private final OkHttpClient client = new OkHttpClient();
 
