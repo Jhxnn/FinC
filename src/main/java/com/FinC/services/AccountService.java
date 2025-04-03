@@ -52,7 +52,7 @@ public class AccountService {
                 "Parabéns por ter registrado uma conta no FinC " + account.getUser().getName() + ", faça bom proveito. \nEm caso de duvidas nos contate ;) ");
         return accountRepository.save(account);
     }
-    public byte[] gerarPdf(AccountAndDateDto accountAndDateDto) {
+    public byte[] pdf(AccountAndDateDto accountAndDateDto) {
 
         List<Expense> expenses = expenseService.findByDate(accountAndDateDto.accountId(),accountAndDateDto.startDate(),accountAndDateDto.endDate());
         List<Revenue> revenues = revenueService.findByDate(accountAndDateDto.accountId(),accountAndDateDto.startDate(),accountAndDateDto.endDate());
