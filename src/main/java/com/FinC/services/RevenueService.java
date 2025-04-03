@@ -1,13 +1,16 @@
 package com.FinC.services;
 
 import com.FinC.dtos.RevenueDto;
+import com.FinC.models.Account;
 import com.FinC.models.Expense;
 import com.FinC.models.Revenue;
 import com.FinC.repositories.RevenueRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +37,10 @@ public class RevenueService {
         var revenue = new Revenue();
         BeanUtils.copyProperties(revenueDto,revenue);
         return revenueRepository.save(revenue);
+    }
+    public List<Revenue> findByDate(UUID accountId, LocalDate startDate, LocalDate endDate){
+        var account = accountService.findById(accountId);
+        return revenueRepository.findByAccountAndDateBetween(account, startDate, endDate);
     }
     public Revenue updateRevenue(RevenueDto revenueDto,UUID id){
         var revenue = findById(id);

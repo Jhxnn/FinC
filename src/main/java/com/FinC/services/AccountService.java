@@ -3,6 +3,10 @@ package com.FinC.services;
 import com.FinC.dtos.AccountDto;
 import com.FinC.models.Account;
 import com.FinC.repositories.AccountRepository;
+import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,15 @@ public class AccountService {
         BeanUtils.copyProperties(accountDto,account);
 //        emailService.enviarEmailTexto()
         return accountRepository.save(account);
+    }
+    public byte[] gerarPdf(UUID id) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        PdfWriter writer = new PdfWriter(byteArrayOutputStream);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+        return byteArrayOutputStream.toByteArray();
+
     }
     public Account updateAccount(AccountDto accountDto,UUID id){
         var account = findById(id);
