@@ -1,5 +1,6 @@
 package com.FinC.controllers;
 
+import com.FinC.dtos.AccountAndDateDto;
 import com.FinC.dtos.RecurringExpenseDto;
 import com.FinC.models.Expense;
 import com.FinC.models.RecurringExpense;
@@ -27,6 +28,14 @@ public class RecurringExpenseController {
     @GetMapping("/{id}")
     public ResponseEntity<RecurringExpense> findById(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(recurringExpenseService.findById(id));
+    }
+
+    @GetMapping("/date")
+    public ResponseEntity<List<RecurringExpense>> findByDate(@RequestBody AccountAndDateDto accountAndDateDto){
+        return ResponseEntity.status(HttpStatus.OK).body(recurringExpenseService.findByDate(
+                accountAndDateDto.accountId(),
+                accountAndDateDto.startDate()
+                ,accountAndDateDto.endDate()));
     }
 
     @GetMapping("/account/{accountId}")

@@ -1,5 +1,6 @@
 package com.FinC.controllers;
 
+import com.FinC.dtos.AccountAndDateDto;
 import com.FinC.dtos.RevenueDto;
 import com.FinC.models.Expense;
 import com.FinC.models.Revenue;
@@ -28,6 +29,14 @@ public class RevenueController {
     public ResponseEntity<List<Revenue>> findByAccount(@PathVariable(name = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(revenueService.findByAccount(id));
     }
+    @GetMapping("/date")
+    public ResponseEntity<List<Revenue>> findByDate(@RequestBody AccountAndDateDto accountAndDateDto){
+        return ResponseEntity.status(HttpStatus.OK).body(revenueService.findByDate(
+                accountAndDateDto.accountId(),
+                accountAndDateDto.startDate()
+                ,accountAndDateDto.endDate()));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Revenue> findById(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(revenueService.findById(id));

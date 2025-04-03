@@ -1,5 +1,6 @@
 package com.FinC.controllers;
 
+import com.FinC.dtos.AccountAndDateDto;
 import com.FinC.dtos.ExpenseDto;
 import com.FinC.models.Expense;
 import com.FinC.services.ExpenseService;
@@ -30,6 +31,15 @@ public class ExpenseController {
     public ResponseEntity<List<Expense>> findByAccount(@PathVariable(name = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(expenseService.findByAccount(id));
     }
+
+    @GetMapping("/date")
+    public ResponseEntity<List<Expense>> findByDate(@RequestBody AccountAndDateDto accountAndDateDto){
+        return ResponseEntity.status(HttpStatus.OK).body(expenseService.findByDate(
+                accountAndDateDto.accountId(),
+                accountAndDateDto.startDate()
+                ,accountAndDateDto.endDate()));
+    }
+
     @PostMapping
     public ResponseEntity<Expense> createExpense(@RequestBody ExpenseDto expenseDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.createExpense(expenseDto));
