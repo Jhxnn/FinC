@@ -34,23 +34,22 @@ public class UserService {
 
     public UserResponseDto findById(UUID id) {
         var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
-        return new UserResponseDto(user.getEmail(),user.getName(), user.getUserId());
+        return new UserResponseDto(user.getEmail(),user.getName(), user.getUserId(),user.getRole());
     }
     public List<UserResponseDto> findAll(){
         var users = userRepository.findAll();
         return users.stream()
-                .map(user -> new UserResponseDto(user.getName(), user.getEmail(),user.getUserId()))
+                .map(user -> new UserResponseDto(user.getName(), user.getEmail(),user.getUserId(),user.getRole()))
                 .toList();
     }
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         if(userRepository.findByEmail(userRequestDto.email()) != null) return null;
         String encryptedPass = new BCryptPasswordEncoder().encode(userRequestDto.password());
-
         var user = new User();
         BeanUtils.copyProperties(userRequestDto, user);
         user.setPassword(encryptedPass);
         userRepository.save(user);
-        return new UserResponseDto(user.getEmail(),user.getName(),user.getUserId());
+        return new UserResponseDto(user.getEmail(),user.getName(),user.getUserId(),user.getRole());
     }
     public String returnToken(AuthDto authDto) {
         var usernamePassord = new UsernamePasswordAuthenticationToken(authDto.email(), authDto.password());
@@ -63,7 +62,7 @@ public class UserService {
         var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
         BeanUtils.copyProperties(userRequestDto, user);
         userRepository.save(user);
-        return new UserResponseDto(user.getEmail(),user.getName(), user.getUserId());
+        return new UserResponseDto(user.getEmail(),user.getName(), user.getUserId(),user.getRole());
 
     }
     public void deleteUser(UUID id) {

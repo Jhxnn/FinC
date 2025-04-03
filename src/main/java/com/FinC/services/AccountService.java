@@ -2,11 +2,9 @@ package com.FinC.services;
 
 import com.FinC.dtos.AccountAndDateDto;
 import com.FinC.dtos.AccountDto;
-import com.FinC.models.Account;
-import com.FinC.models.Expense;
-import com.FinC.models.RecurringExpense;
-import com.FinC.models.Revenue;
+import com.FinC.models.*;
 import com.FinC.repositories.AccountRepository;
+import com.FinC.repositories.UserRepository;
 import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -30,6 +28,9 @@ public class AccountService {
     EmailService emailService;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     ExpenseService expenseService;
 
     @Autowired
@@ -44,9 +45,12 @@ public class AccountService {
     public List<Account> findAll(){
         return accountRepository.findAll();
     }
+
     public Account createAccount(AccountDto accountDto){
         var account = new Account();
         BeanUtils.copyProperties(accountDto,account);
+        var user = userRepository.findById(accountDto.userId()).orElseThrow(()-> new RuntimeException("Cannot be found"));
+        account.setUser(user);
         emailService.enviarEmailTexto(account.getUser().getEmail(),
                 "Conta registrada - FinC",
                 "Parabéns por ter registrado uma conta no FinC " + account.getUser().getName() + ", faça bom proveito. \nEm caso de duvidas nos contate ;) ");

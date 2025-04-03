@@ -3,8 +3,7 @@ package com.FinC.models.enums;
 public enum UserRole {
 
     ADMIN("admin"),
-    BASIC("basic"),
-    STORE_OWNER("store");
+    BASIC("basic");
 
     private String role;
 

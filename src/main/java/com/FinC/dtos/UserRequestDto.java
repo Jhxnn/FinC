@@ -1,4 +1,6 @@
 package com.FinC.dtos;
 
-public record UserRequestDto(String name, String email, String password) {
+import com.FinC.models.enums.UserRole;
+
+public record UserRequestDto(String name, String email, String password, UserRole role) {
 }

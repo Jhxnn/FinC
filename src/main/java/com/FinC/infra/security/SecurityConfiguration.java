@@ -28,8 +28,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/account").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/recurringExpense").permitAll()
                         .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
